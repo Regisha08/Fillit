@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aponomar <aponomar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnureeva <rnureeva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:52:45 by aponomar          #+#    #+#             */
-/*   Updated: 2019/09/10 21:15:39 by aponomar         ###   ########.fr       */
+/*   Updated: 2019/09/11 21:44:17 by rnureeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ char                *move_left_fig(char *fig);
 int                 valid_fig(char *fig);
 int		            pre_valid_fig(char *fig);
 t_fig		        *save_fig(t_fig *list, char *fig, int s_num);
+int                 read_fig(char *line, t_fig *get_fig, int fd, int s_num);
+void		print_list(t_fig *list);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_fig.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aponomar <aponomar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnureeva <rnureeva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 16:56:34 by aponomar          #+#    #+#             */
-/*   Updated: 2019/09/10 21:54:39 by aponomar         ###   ########.fr       */
+/*   Updated: 2019/09/11 21:53:12 by rnureeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_fig		*save_fig(t_fig *list, char *fig, int s_num)
 	t_fig	*tmp = list;
 	t_fig	*new = (t_fig *)malloc(sizeof(t_fig));
 	new->fig_save = fig;
-	printf("string in list = \n%s", new->fig_save = fig);
+	// printf("string in list = \n%s", new->fig_save = fig);
 	new->sn = s_num;
-	printf("serian number figure = %d\n", new->sn = s_num);
+	// printf("serian number figure = %d\n", new->sn = s_num);
 	new->next = NULL;
 	if (!list)	
 		return (new);
