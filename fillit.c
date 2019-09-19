@@ -6,7 +6,7 @@
 /*   By: rnureeva <rnureeva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 15:51:10 by aponomar          #+#    #+#             */
-/*   Updated: 2019/09/15 16:57:42 by rnureeva         ###   ########.fr       */
+/*   Updated: 2019/09/19 00:41:26 by rnureeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,22 @@
 void		print_list(t_fig *list)
 {
 	t_fig	*tmp = list;
+	int		i;
+
+	i = 0;
 	printf("\n\n----------------------------------------\n\n");
 	while (tmp)
 	{
+		i = 0;
 		printf("[%d]\n%s\n", tmp->sn, tmp->fig_save);
+		while (i < 4)
+		{
+			printf("{%d} ", tmp->arr[i]);
+			i++;
+		}
+		printf("\n");
+		printf("tmp =\t%d\n del =\t%d\n inc =\t%d\n",tmp->tmp_j, tmp->del, tmp->inc);
+		
 		tmp = tmp->next;
 	}
 }
@@ -78,25 +90,58 @@ int read_fig(char *line, t_fig *get_fig, int fd, int s_num)
 		fig = "\0";
 	}
 	print_list(head);
-	reverse(&head);
-	print_list(head);
+	
+
 	area = create_area(s_num);
-	fig = check_add_fig(area, head->fig_save);
+	fig = check_add_fig(area, head);
 	get_fig = head->next;
+	printf("include head: %d\n", head->inc);
 	while (get_fig->next != NULL)
 	{
-		check_add_fig(fig, get_fig->fig_save);
+		check_add_fig(fig, get_fig);
+		printf("include: %d\n", get_fig->inc);
 		get_fig = get_fig->next;
 	}
-	check_add_fig(fig, get_fig->fig_save);
+	check_add_fig(fig, get_fig);
+	printf("include: %d\n", get_fig->inc);
 	
-	// get_fig = get_fig->next;
-	// check_add_fig(fig, get_fig->fig_save);
-	// get_fig = get_fig->next;
-	// check_add_fig(fig, get_fig->fig_save);
-	// get_fig = get_fig->next;
-	// check_add_fig(fig, get_fig->fig_save);
+	i = 0;
+	j = get_fig->sn;
+	while (get_fig->sn != 1)
+	{
+		i = j - 1;
+		while (head->sn != i)
+        	head = head->next;
+		if (head->inc == 1 || (head->del == 1 && head->tmp_j == 0))
+		{
+			find_fig_for_del(area, head, i);
+		}
+		else if (head->inc == 0 && head->del == 1)
+		{
+			while (head->tmp_j != ((int)ft_strlen(area) - 1) || head->inc == 1)
+			{
+				head->tmp_j++;
+				check_add_fig(area, head);
+			}
+			if (head->inc == 1)
+			{
+				head = head->next;
+				head->tmp_j = 0;
+				check_add_fig(area, head);
+			}
+			else
+				j--;
+		}	
+		
+		// else if (head->inc == 1 && head->del == 0)
+		// {
+		// 	head->tmp_j = 0;
+		// }
+		
+		
+	}
 	
+
 	return (1);
 }
 	
