@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnureeva <rnureeva@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aponomar <aponomar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 15:51:10 by aponomar          #+#    #+#             */
-/*   Updated: 2019/09/19 00:41:26 by rnureeva         ###   ########.fr       */
+/*   Updated: 2019/09/19 22:58:19 by aponomar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int read_fig(char *line, t_fig *get_fig, int fd, int s_num)
 	char		*area = "\0";
 	
 	i = 1;
-	j = 1;
+	// j = 1;
 	count = 0;
 	while (i != 0)
 	{
@@ -89,8 +89,10 @@ int read_fig(char *line, t_fig *get_fig, int fd, int s_num)
 		count = 0;
 		fig = "\0";
 	}
-	print_list(head);
+	get_fig->sum_fig = s_num - 1;
+	head->sum_fig = s_num - 1;
 	
+	print_list(head);
 
 	area = create_area(s_num);
 	fig = check_add_fig(area, head);
@@ -106,31 +108,58 @@ int read_fig(char *line, t_fig *get_fig, int fd, int s_num)
 	printf("include: %d\n", get_fig->inc);
 	
 	i = 0;
-	j = get_fig->sn;
-	while (get_fig->sn != 1)
+	j = 1;
+	get_fig->sum_fig = head->sum_fig;
+	printf("sum_fig in head: %d\n", head->sum_fig);
+	printf("sum_fig in get_fig: %d\n", get_fig->sum_fig);
+	while (get_fig->sn != 1 || (get_fig->sn == get_fig->sum_fig && get_fig->inc == 1))
 	{
-		i = j - 1;
-		while (head->sn != i)
-        	head = head->next;
-		if (head->inc == 1 || (head->del == 1 && head->tmp_j == 0))
+		if (get_fig->inc == 0)
+			i = get_fig->sn - j;
+		else
+			i = get_fig->sn + j;
+		get_fig = head->next;
+		get_fig->sum_fig = head->sum_fig;
+		printf("sum_fig in head: %d\n", head->sum_fig);
+		printf("sum_fig in get_fig: %d\n", get_fig->sum_fig);
+		while (get_fig->sn != i || (get_fig->sn == get_fig->sum_fig && get_fig->inc == 1))
+        	get_fig = get_fig->next;
+		if (get_fig->inc == 1 || (get_fig->del == 1 && get_fig->tmp_j == 0))
 		{
-			find_fig_for_del(area, head, i);
+			find_fig_for_del(area, get_fig, i);
 		}
-		else if (head->inc == 0 && head->del == 1)
+		if (get_fig->inc == 0 && get_fig->del == 1)
 		{
-			while (head->tmp_j != ((int)ft_strlen(area) - 1) || head->inc == 1)
+			if (get_fig->tmp_j != ((int)ft_strlen(area) - 1) || get_fig->inc == 1)
 			{
-				head->tmp_j++;
-				check_add_fig(area, head);
+				get_fig->tmp_j++;
+				check_add_fig(area, get_fig);
 			}
-			if (head->inc == 1)
+			if (get_fig->tmp_j == ((int)ft_strlen(area) - 1))
+				check_add_fig(area, get_fig);
+			if ((get_fig->tmp_j == ((int)ft_strlen(area) - 1)) && get_fig->del == 1)
 			{
-				head = head->next;
-				head->tmp_j = 0;
-				check_add_fig(area, head);
+				i--;
+				get_fig = head->next;
+				while (get_fig->sn != i || (get_fig->sn == get_fig->sum_fig && get_fig->inc == 1))
+					get_fig = get_fig->next;
+				find_fig_for_del(area, get_fig, i);
+				get_fig->tmp_j++;
+				check_add_fig(area, get_fig);
 			}
-			else
-				j--;
+			if (get_fig->inc == 1)
+			{
+				get_fig = get_fig->next;
+				get_fig->del = 0;
+				check_add_fig(area, get_fig);
+				// j++;
+			}
+			if (get_fig->sn == get_fig->sum_fig && get_fig->inc == 1)
+				return (1);
+			// else
+			// {
+			// 	j--;
+			// }
 		}	
 		
 		// else if (head->inc == 1 && head->del == 0)

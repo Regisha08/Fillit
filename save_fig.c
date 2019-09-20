@@ -6,7 +6,7 @@
 /*   By: aponomar <aponomar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 16:56:34 by aponomar          #+#    #+#             */
-/*   Updated: 2019/09/17 16:19:02 by aponomar         ###   ########.fr       */
+/*   Updated: 2019/09/19 15:05:36 by aponomar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,4 @@ t_fig		*save_fig(t_fig *list, char *fig, int s_num)
 	}
 	
 	return(list); 
-}
-
-void		reverse_fig(t_fig **head_rev)
-{
-	t_fig	*prev = NULL;
-	t_fig	*current = *head_rev;
-	t_fig	*next = NULL;
-
-	while (current != NULL) 
-	{
-		next = current->next;
-		current->next = prev;
-
-		prev = current;
-		current = next;
-	}
-	*head_rev = prev;
 }

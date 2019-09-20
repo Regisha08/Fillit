@@ -6,7 +6,7 @@
 /*   By: aponomar <aponomar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:52:45 by aponomar          #+#    #+#             */
-/*   Updated: 2019/09/17 16:17:01 by aponomar         ###   ########.fr       */
+/*   Updated: 2019/09/19 21:33:55 by aponomar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct      s_fig
 {
     int             sn;
+    int             sum_fig;
     int             tmp_j; // start index at the time of adding the figure to the area
     int             inc; // variable what show included figure (1) or not (0)
     int             del;

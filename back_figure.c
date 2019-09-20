@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   back_figure.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnureeva <rnureeva@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aponomar <aponomar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 23:50:59 by aponomar          #+#    #+#             */
-/*   Updated: 2019/09/19 00:18:27 by rnureeva         ###   ########.fr       */
+/*   Updated: 2019/09/19 14:38:04 by aponomar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void    delete_fig(char *area, t_fig *get_fig)
     // get_fig->tmp_j++;
     get_fig->del = 1;
     get_fig->inc = 0;
-    printf("in delete_fig:\nname fig: %c\ntmp =\t%d\n del =\t%d\n inc =\t%d\n", get_fig->sn + 64, get_fig->tmp_j, get_fig->del, get_fig->inc);
+    printf("in delete_fig:\nname fig: %c\ntmp =\t%d\ndel =\t%d\ninc =\t%d\n", get_fig->sn + 64, get_fig->tmp_j, get_fig->del, get_fig->inc);
     //check_add_fig(area, get_fig);
 }
 
@@ -39,5 +39,3 @@ void    find_fig_for_del(char *area, t_fig *get_fig, int i)
     if (get_fig->sn == i)
         delete_fig(area, get_fig);  
 }
-
-
