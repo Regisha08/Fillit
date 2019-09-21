@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aponomar <aponomar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnureeva <rnureeva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:52:45 by aponomar          #+#    #+#             */
-/*   Updated: 2019/09/19 21:33:55 by aponomar         ###   ########.fr       */
+/*   Updated: 2019/09/20 20:02:55 by rnureeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ typedef struct      s_fig
     char            *fig_save;
     int             arr[4];
     struct s_fig    *next;
+    char            *fig;
     struct s_fig    *prev;
+    int             s_num;
 }                   t_fig;
 
 char                *check_add_fig(char *area, t_fig *get_fig);
