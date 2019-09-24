@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnureeva <rnureeva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/06 13:52:45 by aponomar          #+#    #+#             */
-/*   Updated: 2019/09/20 20:02:55 by rnureeva         ###   ########.fr       */
+/*   Created: 2019/09/22 04:39:46 by aponomar          #+#    #+#             */
+/*   Updated: 2019/09/22 18:55:59 by rnureeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,34 @@
 # define FILLIT_H
 
 # include "libft/libft.h"
-# include <stdio.h>
 
-typedef struct      s_fig
+typedef struct		s_fig
 {
-    int             sn;
-    int             sum_fig;
-    int             tmp_j; // start index at the time of adding the figure to the area
-    int             inc; // variable what show included figure (1) or not (0)
-    int             del;
-    int             ch_c;
-    int             i;
-    int             j;
-    char            *fig_save;
-    int             arr[4];
-    struct s_fig    *next;
-    char            *fig;
-    struct s_fig    *prev;
-    int             s_num;
-}                   t_fig;
+	int				sn;
+	struct s_fig	*next;
+	struct s_fig	*prev;
+	int				*xind;
+	int				*yind;
+}					t_fig;
 
-char                *check_add_fig(char *area, t_fig *get_fig);
-char                *convert_to_letter(t_fig *get_fig);
-char                *create_area(int sum_fig);
-char                *create_fig(char *line, char *fig);
-void                find_fig_for_del(char *area, t_fig *get_fig, int i);
-int		            get_next_line(const int fd, char **line);
-int		            min_sqr(int sum_fig);
-char                *move_left_fig(char *fig);
-int		            pre_valid_fig(char *fig);
-void		        print_list(t_fig *list);
-int                 read_fig(char *line, t_fig *get_fig, int fd, int s_num);
-void		        reverse_fig(t_fig **head_rev);
-t_fig		        *save_fig(t_fig *list, char *fig, int s_num);
-int                 valid_fig(char *fig);
-int		            width_area(char *area);
+int					fillit(int fd);
+t_fig				*read_figs(int fd);
+t_fig				*save_fig(char *txt, int sn);
+int					count_list(t_fig *head);
+void				print_list(t_fig *head);
+int					measure_shift_fig_side(int *xind);
+int					shift_validate(int hash_count, int *xind, int *yind);
+int					fig_txt_to_inds(char *txt, int **xind, int **yind);
+void				add_fig(char *area, int sq_side, t_fig *fig, int coord);
+void				remove_fig(char *area, int sq_side, t_fig *fig, int coord);
+int					can_add_figure(char *area, int sq_side, t_fig *fig,
+					int coord);
+int					add_the_next_figure_in_list(char *area, int sq_side,
+					t_fig *fig_list);
+int					min_sq_side(int num_figs);
+char				*init_area(int sq_side);
+void				dell_fig_list(t_fig *head);
+int					prevalidate(char *txt);
+t_fig				*fig_to_list(t_fig **head, char *buff);
 
 #endif
