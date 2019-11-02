@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aponomar <aponomar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnureeva <rnureeva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 16:34:38 by aponomar          #+#    #+#             */
-/*   Updated: 2019/08/27 20:25:59 by aponomar         ###   ########.fr       */
+/*   Created: 2019/07/22 18:12:06 by rnureeva          #+#    #+#             */
+/*   Updated: 2019/07/22 18:12:45 by rnureeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 char	*ft_strstr(const char *haystack, const char *needle)
 {
-	unsigned int i;
-	unsigned int j;
+	char *a;
+	char *b;
 
-	i = 0;
-	j = 0;
-	if (needle[i] == '\0')
+	if (*needle == '\0')
 		return ((char*)haystack);
-	while (haystack[j] != '\0')
+	while (*haystack)
 	{
-		i = 0;
-		while (haystack[i + j] == needle[i])
+		a = (char*)haystack;
+		b = (char*)needle;
+		while (*b && *a == *b)
 		{
-			i++;
-			if (needle[i] == '\0')
-				return ((char*)haystack + j);
+			a++;
+			b++;
 		}
-		j++;
+		if (*b == '\0')
+			return ((char *)haystack);
+		haystack++;
 	}
 	return (NULL);
 }

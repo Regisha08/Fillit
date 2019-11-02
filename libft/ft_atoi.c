@@ -3,35 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aponomar <aponomar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnureeva <rnureeva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/04 20:18:59 by aponomar          #+#    #+#             */
-/*   Updated: 2019/08/27 20:25:53 by aponomar         ###   ########.fr       */
+/*   Created: 2019/04/30 16:40:44 by rnureeva          #+#    #+#             */
+/*   Updated: 2019/07/24 11:37:44 by rnureeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int							ft_atoi(const char *nptr)
+int		ft_atoi(const char *str)
 {
-	unsigned long long int	sign;
-	unsigned long long int	nbr;
+	int	sign;
+	int	nbr;
 
-	nbr = 0;
 	sign = 1;
-	while (*nptr == ' ' || *nptr == '\n' || *nptr == '\r'
-		|| *nptr == '\t' || *nptr == '\v' || *nptr == '\f')
-		nptr++;
-	if (*nptr == '-' || *nptr == '+')
+	nbr = 0;
+	if (!*str)
+		return (0);
+	while (*str == ' ' || *str == '\v'
+			|| *str == '\t' || *str == '\0'
+			|| *str == '\r' || *str == '\n'
+			|| *str == '\f')
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		if (*nptr == '-')
+		if (*str == '-')
 			sign = -1;
-		nptr++;
+		str++;
 	}
-	while (*nptr >= '0' && *nptr <= '9')
+	while (*str && *str >= '0' && *str <= '9')
 	{
-		nbr = (nbr * 10) + (unsigned long long int)(*nptr - '0');
-		nptr++;
+		nbr = 10 * nbr + (*str - 48);
+		str++;
 	}
 	return (nbr * sign);
 }

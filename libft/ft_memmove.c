@@ -3,37 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aponomar <aponomar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnureeva <rnureeva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 18:40:51 by aponomar          #+#    #+#             */
-/*   Updated: 2019/08/27 20:28:06 by aponomar         ###   ########.fr       */
+/*   Created: 2019/07/22 17:58:18 by rnureeva          #+#    #+#             */
+/*   Updated: 2019/07/22 17:58:19 by rnureeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include <string.h>
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	const char	*d;
-	const char	*d1;
-	char		*s;
-	char		*s1;
+	unsigned char *dst2;
+	unsigned char *src2;
 
-	if (src == NULL && dst == NULL)
-		return (NULL);
-	s = dst;
-	d = src;
-	if (s < d)
-	{
+	dst2 = (unsigned char*)dst;
+	src2 = (unsigned char*)src;
+	if (dst >= src)
 		while (len--)
-			*s++ = *d++;
-	}
+			dst2[len] = src2[len];
 	else
-	{
-		d1 = d + (len - 1);
-		s1 = s + (len - 1);
 		while (len--)
-			*s1-- = *d1--;
-	}
+		{
+			*dst2 = *src2;
+			src2++;
+			dst2++;
+		}
 	return (dst);
 }

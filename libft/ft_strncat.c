@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aponomar <aponomar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnureeva <rnureeva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 18:42:15 by aponomar          #+#    #+#             */
-/*   Updated: 2019/08/27 20:29:58 by aponomar         ###   ########.fr       */
+/*   Created: 2019/07/23 15:49:11 by rnureeva          #+#    #+#             */
+/*   Updated: 2019/07/23 15:49:24 by rnureeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 char	*ft_strncat(char *restrict s1, const char *restrict s2, size_t n)
 {
-	char	*str;
-	size_t	i;
+	unsigned int i;
+	unsigned int j;
 
-	str = s1;
 	i = 0;
-	while (*s1 != '\0' && *s1 != '\n')
-		s1++;
-	while (i < n && *s2 != '\0')
-	{
-		*s1++ = *s2++;
+	j = 0;
+	while (s1[i])
 		i++;
+	while (s2[j] && j < n)
+	{
+		s1[i] = s2[j];
+		i++;
+		j++;
 	}
-	*s1 = '\0';
-	return (str);
+	s1[i] = '\0';
+	return (s1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aponomar <aponomar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnureeva <rnureeva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 10:36:11 by aponomar          #+#    #+#             */
-/*   Updated: 2019/08/27 20:30:45 by aponomar         ###   ########.fr       */
+/*   Created: 2019/07/23 17:08:46 by rnureeva          #+#    #+#             */
+/*   Updated: 2019/07/23 17:11:26 by rnureeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,28 @@
 char	*ft_strtrim(char const *s)
 {
 	char	*str;
+	char	*res;
+	size_t	len;
 
 	if (s == NULL)
 		return (NULL);
-	if ((ft_strlen(s) - ft_trimlen(s)) > 0)
+	len = ft_strlen(s);
+	str = (char *)malloc(len + 1);
+	if (str == NULL)
+		return (NULL);
+	res = str;
+	while (*s == ' ' || *s == '\t' || *s == '\n')
+		s++;
+	while (*s)
 	{
-		str = ft_malloclen(s);
+		*str = *s;
+		str++;
+		s++;
 	}
-	else
-		str = ft_strdup(s);
-	return (str);
+	str--;
+	while (*str == ' ' || *str == '\t' || *str == '\n')
+		str--;
+	str++;
+	*str = '\0';
+	return (res);
 }
